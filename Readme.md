@@ -35,7 +35,7 @@ The AOC contains 25 days with at least one puzzle/question per day (mostly there
 For running the day `day00`
 
 * Use your IDE, it's simpler: Run the specific day.
-* CLI: just enter `export DAY=01; ./mvnw compile exec:java -Dexec.mainClass=de.knallisworld.aoc2024.day$DAY.Day$DAY`
+* CLI: just enter `export DAY=00; ./mvnw compile exec:java -Dexec.mainClass=de.knallisworld.aoc2024.day$DAY.Day$DAY`
 
 ## License / Copyright
 
