@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 public class Commons {
 
-	static final int YEAR = 2023;
+	static final int YEAR = 2024;
 
 	public static void printHeader(long day) {
 		System.out.println("#".repeat(21));
