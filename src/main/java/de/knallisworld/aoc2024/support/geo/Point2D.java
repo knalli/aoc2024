@@ -43,7 +43,7 @@ public class Point2D<T extends Number> {
 															 final T y,
 															 final Supplier<Point2D<T>> creator) {
 		return (Point2D<T>) CACHE.computeIfAbsent(x, _ -> new WeakHashMap<>())
-								 .computeIfAbsent(y, _ -> creator.get());
+				.computeIfAbsent(y, _ -> creator.get());
 	}
 
 	public static <T extends Number> Point2D<T> create(
@@ -139,7 +139,6 @@ public class Point2D<T extends Number> {
 		}
 		return b;
 	}
-
 
 	public Stream<Point2D<T>> getAdjacents4() {
 		return Stream.of(

@@ -13,9 +13,9 @@ public class InputParser {
 
 	public static Stream<Integer> str2int(final String str, final String separator) {
 		return Arrays.stream(str.split(separator))
-					 .map(String::strip)
-					 .filter(StringUtils::hasText)
-					 .map(Integer::parseInt);
+				.map(String::strip)
+				.filter(StringUtils::hasText)
+				.map(Integer::parseInt);
 	}
 
 	public static Stream<Long> str2long(final String str) {
@@ -24,9 +24,9 @@ public class InputParser {
 
 	public static Stream<Long> str2long(final String str, final String separator) {
 		return Arrays.stream(str.split(separator))
-					 .map(String::strip)
-					 .filter(StringUtils::hasText)
-					 .map(Long::parseLong);
+				.map(String::strip)
+				.filter(StringUtils::hasText)
+				.map(Long::parseLong);
 	}
 
 }

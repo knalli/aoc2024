@@ -63,7 +63,6 @@ public class InfiniteGrid<T> {
 		public record Field<T>(Point2D<Integer> pos, T value) {
 		}
 
-
 		private final InfiniteGrid<T> grid;
 		private final Settings settings;
 		private final Map<Point2D<Integer>, Set<Point2D<Integer>>> adjacents4Cache;
@@ -98,6 +97,5 @@ public class InfiniteGrid<T> {
 		}
 
 	}
-
 
 }

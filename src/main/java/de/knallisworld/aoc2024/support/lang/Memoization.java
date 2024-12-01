@@ -75,7 +75,7 @@ public class Memoization {
 				cache.put(input, new Item<>(output));
 			}
 			return Optional.ofNullable(cache.get(input))
-						   .map(Item::value);
+					.map(Item::value);
 		};
 	}
 

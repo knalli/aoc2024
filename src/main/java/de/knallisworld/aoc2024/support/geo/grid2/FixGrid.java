@@ -39,32 +39,32 @@ public class FixGrid<T> {
 		}
 		final var dst = new FixGrid<>(src.type, src.data.length * scale, src.data[0].length * scale);
 		IntStream.range(0, src.data.length)
-				 .forEach(srcY -> {
-					 IntStream.range(0, src.data[srcY].length)
-							  .forEach(srcX -> {
-								  final var dstOffset = Point2D.create(srcX * scale, srcY * scale);
-								  final var dstCenter = dstOffset.downRight();
-								  dst.setValue(dstCenter, src.getValueRequired(srcX, srcY));
+				.forEach(srcY -> {
+					IntStream.range(0, src.data[srcY].length)
+							.forEach(srcX -> {
+								final var dstOffset = Point2D.create(srcX * scale, srcY * scale);
+								final var dstCenter = dstOffset.downRight();
+								dst.setValue(dstCenter, src.getValueRequired(srcX, srcY));
 
-								  final var temp = FixGrid.create(src.type, scale, scale);
-								  valueExtrapolator.accept(
-										  new FieldsView.Field<>(
-												  dstCenter,
-												  dst.getValueRequired(dstCenter)
-										  ),
-										  temp
-								  );
+								final var temp = FixGrid.create(src.type, scale, scale);
+								valueExtrapolator.accept(
+										new FieldsView.Field<>(
+												dstCenter,
+												dst.getValueRequired(dstCenter)
+										),
+										temp
+								);
 
-								  temp.fields()
-									  .forEach(field -> {
-										  dst.setValue(
-												  dstOffset.getX() + field.pos().getX(),
-												  dstOffset.getY() + field.pos().getY(),
-												  field.value()
-										  );
-									  });
-							  });
-				 });
+								temp.fields()
+										.forEach(field -> {
+											dst.setValue(
+													dstOffset.getX() + field.pos().getX(),
+													dstOffset.getY() + field.pos().getY(),
+													field.value()
+											);
+										});
+							});
+				});
 		return dst;
 	}
 
@@ -92,8 +92,8 @@ public class FixGrid<T> {
 		final var clone = create(type, (int) from.maxY() + 1 + offsetY, (int) from.maxX() + 1 + offsetX);
 		clone.fill(defaultValue);
 		from.fields()
-			.stream()
-			.forEach(f -> clone.setValue(f.position().down(offsetY).right(offsetX), f.value()));
+				.stream()
+				.forEach(f -> clone.setValue(f.position().down(offsetY).right(offsetX), f.value()));
 		return clone;
 	}
 
@@ -177,8 +177,8 @@ public class FixGrid<T> {
 
 	public void fill(T value) {
 		IntStream.range(0, data.length)
-				 .forEach(y -> IntStream.range(0, data[y].length)
-										.forEach(x -> data[y][x] = value));
+				.forEach(y -> IntStream.range(0, data[y].length)
+						.forEach(x -> data[y][x] = value));
 	}
 
 	public int getHeight() {
@@ -261,28 +261,28 @@ public class FixGrid<T> {
 
 		public Stream<Point2D<Integer>> topEdge() {
 			return IntStream.range(0, grid.getWidth())
-							.boxed()
-							.map(x -> Point2D.create(x, 0));
+					.boxed()
+					.map(x -> Point2D.create(x, 0));
 		}
 
 		public Stream<Point2D<Integer>> bottomEdge() {
 			final var y = grid.getHeight() - 1;
 			return IntStream.range(0, grid.getWidth())
-							.boxed()
-							.map(x -> Point2D.create(x, y));
+					.boxed()
+					.map(x -> Point2D.create(x, y));
 		}
 
 		public Stream<Point2D<Integer>> leftEdge() {
 			return IntStream.range(0, grid.getHeight())
-							.boxed()
-							.map(y -> Point2D.create(0, y));
+					.boxed()
+					.map(y -> Point2D.create(0, y));
 		}
 
 		public Stream<Point2D<Integer>> rightEdge() {
 			final var x = grid.getWidth() - 1;
 			return IntStream.range(0, grid.getHeight())
-							.boxed()
-							.map(y -> Point2D.create(x, y));
+					.boxed()
+					.map(y -> Point2D.create(x, y));
 		}
 
 	}
@@ -351,15 +351,15 @@ public class FixGrid<T> {
 		final var sb = new StringBuilder();
 
 		IntStream.range(0, data.length)
-				 .forEach(y -> {
-					 IntStream.range(0, data[y].length)
-							  .forEach(x -> {
-								  final var p = Point2D.create(x, y);
-								  final var v = getValueRequired(p);
-								  sb.append(renderer.apply(p, v));
-							  });
-					 sb.append("\n");
-				 });
+				.forEach(y -> {
+					IntStream.range(0, data[y].length)
+							.forEach(x -> {
+								final var p = Point2D.create(x, y);
+								final var v = getValueRequired(p);
+								sb.append(renderer.apply(p, v));
+							});
+					sb.append("\n");
+				});
 
 		return sb.toString();
 	}
