@@ -46,9 +46,34 @@ public class InputReader {
 	}
 
 	@SneakyThrows
-	public static <T> List<List<T>> readInputLines(final int day,
-												   final String name,
-												   final Function<String, Stream<T>> transformer) {
+	public static <T> Stream<T> readInputLinesAsStream(final int day,
+													   final String name,
+													   final Function<String, T> converter) {
+		try (final var reader = new BufferedReader(new InputStreamReader(buildInputStream(day, name)))) {
+			final var result = new ArrayList<String>();
+			while (true) {
+				String line = reader.readLine();
+				if (line == null) {
+					break;
+				}
+				result.add(line);
+			}
+			return result.stream()
+					.map(converter);
+		}
+	}
+
+	@SneakyThrows
+	public static <T> List<T> readInputLines(final int day,
+											 final String name,
+											 final Function<String, T> converter) {
+		return readInputLinesAsStream(day, name, converter).toList();
+	}
+
+	@SneakyThrows
+	public static <T> List<List<T>> readInputLinesMulti(final int day,
+														final String name,
+														final Function<String, Stream<T>> transformer) {
 		try (final var reader = new BufferedReader(new InputStreamReader(buildInputStream(day, name)))) {
 			final var result = new ArrayList<List<T>>();
 			while (true) {
