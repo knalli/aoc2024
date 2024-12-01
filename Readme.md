@@ -4,8 +4,12 @@ Welcome to my solutions of [Advent Of Code](http://adventofcode.com) 2024 (AOC 2
 
 A huge thanks to @topaz and his team for providing this great service.
 
-After multiple years using Go and last year's Rust, this time I will step back using
-the good old Java. Needless to say, this means the latest Java 23 with enabled preview
+After [multiple](https://github.com/knalli/aoc2018) 
+[years](https://github.com/knalli/aoc2019) 
+[using](https://github.com/knalli/aoc2020) 
+[Go](https://github.com/knalli/aoc2021), one year [Rust](https://github.com/knalli/aoc2022), 
+this time I will step back using
+the good old Java ([again](https://github.com/knalli/aoc2023)). Needless to say, this means the latest Java 23 with enabled preview
 flags. There may be usage of virtual threads, structured scopes and even
 native experiments (although not part of Java itself, but an overall current theme).
 We put all the s… together.
