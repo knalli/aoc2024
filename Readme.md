@@ -5,7 +5,7 @@ Welcome to my solutions of [Advent Of Code](http://adventofcode.com) 2024 (AOC 2
 A huge thanks to @topaz and his team for providing this great service.
 
 After multiple years using Go and last year's Rust, this time I will step back using
-the good old Java. Needless to say, this means the latest Java 21 with enabled preview
+the good old Java. Needless to say, this means the latest Java 23 with enabled preview
 flags. There may be usage of virtual threads, structured scopes and even
 native experiments (although not part of Java itself, but an overall current theme).
 We put all the s… together.
