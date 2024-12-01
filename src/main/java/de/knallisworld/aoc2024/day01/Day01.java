@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import static de.knallisworld.aoc2024.support.cli.Commons.printHeader;
 import static de.knallisworld.aoc2024.support.cli.Commons.printSolution;
 import static de.knallisworld.aoc2024.support.puzzle.InputReader.readInputLinesAsStream;
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
@@ -18,7 +19,9 @@ public class Day01 {
 		printHeader(1);
 
 		final var listL = readInputLinesAsStream(1, "part1", s -> Integer.parseInt(s.split(" +")[0]))
+				// sorting only required for part1
 				.sorted()
+				// sorting only required for part1
 				.toList();
 		final var listR = readInputLinesAsStream(1, "part1", s -> Integer.parseInt(s.split(" +")[1]))
 				.sorted()
@@ -31,16 +34,19 @@ public class Day01 {
 	static int sumOfDistances(final List<Integer> listL, final List<Integer> listR) {
 		assert listL.size() == listR.size();
 		return IntStream.range(0, listL.size())
-		                .map(i -> Math.abs(listL.get(i) - listR.get(i)))
-		                .sum();
+				// use abs for always-positive differences
+				.map(i -> Math.abs(listL.get(i) - listR.get(i)))
+				.sum();
 	}
 
 	static long getSimilarityScore(final List<Integer> listL, final List<Integer> listR) {
+		// avoid counting in loop with a pre-computed map of {"number" -> "counted occurrences"}
 		final var map = listR.stream()
-		                     .collect(groupingBy(a -> a, counting()));
+				.collect(groupingBy(identity(), counting()));
 		return listL.stream()
-		            .mapToLong(n -> n * map.getOrDefault(n, 0L))
-		            .sum();
+				// ensure a default for non-existing numbers
+				.mapToLong(n -> n * map.getOrDefault(n, 0L))
+				.sum();
 	}
 
 }
