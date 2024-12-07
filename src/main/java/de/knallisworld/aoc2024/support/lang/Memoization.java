@@ -27,8 +27,8 @@ public class Memoization {
 	public static <I, O> Function<I, O> memoize(final Function<I, O> loader,
 												final Consumer<MemoizationOptions.MemoizationOptionsBuilder> configurer) {
 		final Function<I, Optional<O>> memoize = memoize0(
-				input -> Optional.ofNullable(loader.apply(input)),
-				configurer
+			input -> Optional.ofNullable(loader.apply(input)),
+			configurer
 		);
 		return input -> memoize.apply(input).orElse(null);
 	}
@@ -75,7 +75,7 @@ public class Memoization {
 				cache.put(input, new Item<>(output));
 			}
 			return Optional.ofNullable(cache.get(input))
-					.map(Item::value);
+						   .map(Item::value);
 		};
 	}
 

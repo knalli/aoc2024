@@ -59,7 +59,7 @@ public class InputReader {
 				result.add(line);
 			}
 			return result.stream()
-					.map(converter);
+						 .map(converter);
 		}
 	}
 

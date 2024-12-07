@@ -91,9 +91,9 @@ public class InfiniteGrid<T> {
 			final var offsetY = y - ry;
 
 			return adjacents4Cache
-					.computeIfAbsent(Point2D.create(rx, ry), rp -> rp.getAdjacents4().collect(toSet()))
-					.stream()
-					.map(rp -> Point2D.create(rp.getX() + offsetX, rp.getY() + offsetY));
+				.computeIfAbsent(Point2D.create(rx, ry), rp -> rp.getAdjacents4().collect(toSet()))
+				.stream()
+				.map(rp -> Point2D.create(rp.getX() + offsetX, rp.getY() + offsetY));
 		}
 
 	}

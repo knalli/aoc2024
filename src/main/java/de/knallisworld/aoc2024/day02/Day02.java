@@ -33,10 +33,10 @@ public class Day02 {
 	static List<List<Integer>> readInput(final int day,
 										 final String name) {
 		return readInputLinesMulti(
-				day,
-				name,
-				line -> Arrays.stream(line.split(" "))
-							  .map(Integer::parseInt)
+			day,
+			name,
+			line -> Arrays.stream(line.split(" "))
+						  .map(Integer::parseInt)
 		);
 	}
 
@@ -84,32 +84,32 @@ public class Day02 {
 	static long countValid(final List<List<Integer>> input,
 						   final Predicate<List<Integer>> filter) {
 		return input
-				.stream()
-				.filter(filter)
-				.count();
+			.stream()
+			.filter(filter)
+			.count();
 	}
 
 	static List<List<Integer>> applyDampenerAlgo(final List<List<Integer>> input,
 												 final Predicate<List<Integer>> filter) {
 		return input
-				.stream()
-				.mapMulti((List<Integer> list, Consumer<List<Integer>> next) -> {
-					if (filter.test(list)) {
-						next.accept(list);
+			.stream()
+			.mapMulti((List<Integer> list, Consumer<List<Integer>> next) -> {
+				if (filter.test(list)) {
+					next.accept(list);
+					return;
+				}
+				// brute-forcing: remove each level/index and try again with the filter
+				for (int i = 0; i < list.size(); i++) {
+					final var candidate = new ArrayList<>(list);
+					//noinspection SuspiciousListRemoveInLoop
+					candidate.remove(i);
+					if (filter.test(candidate)) {
+						next.accept(candidate);
 						return;
 					}
-					// brute-forcing: remove each level/index and try again with the filter
-					for (int i = 0; i < list.size(); i++) {
-						final var candidate = new ArrayList<>(list);
-						//noinspection SuspiciousListRemoveInLoop
-						candidate.remove(i);
-						if (filter.test(candidate)) {
-							next.accept(candidate);
-							return;
-						}
-					}
-				})
-				.toList();
+				}
+			})
+			.toList();
 	}
 
 	enum Order {

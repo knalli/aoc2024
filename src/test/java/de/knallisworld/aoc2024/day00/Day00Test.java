@@ -11,14 +11,14 @@ class Day00Test {
 	@Test
 	void test_part1_SimpleFib() {
 		assertThat(Day00.part1_SimpleFib(8))
-				.isEqualTo(21L);
+			.isEqualTo(21L);
 	}
 
 	@Test
 	void test_part2_ComplexFib() {
 		assertThat(Day00.part2_ComplexFib(8))
-				.extracting(BigInteger::longValue)
-				.isEqualTo(21L);
+			.extracting(BigInteger::longValue)
+			.isEqualTo(21L);
 	}
 
 }

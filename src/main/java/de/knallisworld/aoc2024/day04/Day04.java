@@ -138,62 +138,62 @@ public class Day04 {
 	static long countWordsPart1(final FixGrid<Tile> grid) {
 
 		final var expectationVectors = List.of(
-				// right
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(1, 0), Tile.M),
-						new Expected(Point2D.create(2, 0), Tile.A),
-						new Expected(Point2D.create(3, 0), Tile.S)
-				),
-				// left (backwards)
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(-1, 0), Tile.M),
-						new Expected(Point2D.create(-2, 0), Tile.A),
-						new Expected(Point2D.create(-3, 0), Tile.S)
-				),
-				// down
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(0, 1), Tile.M),
-						new Expected(Point2D.create(0, 2), Tile.A),
-						new Expected(Point2D.create(0, 3), Tile.S)
-				),
-				// up (backwards)
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(0, -1), Tile.M),
-						new Expected(Point2D.create(0, -2), Tile.A),
-						new Expected(Point2D.create(0, -3), Tile.S)
-				),
-				// right/down
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(1, 1), Tile.M),
-						new Expected(Point2D.create(2, 2), Tile.A),
-						new Expected(Point2D.create(3, 3), Tile.S)
-				),
-				// right/up
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(1, -1), Tile.M),
-						new Expected(Point2D.create(2, -2), Tile.A),
-						new Expected(Point2D.create(3, -3), Tile.S)
-				),
-				// left/down
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(-1, 1), Tile.M),
-						new Expected(Point2D.create(-2, 2), Tile.A),
-						new Expected(Point2D.create(-3, 3), Tile.S)
-				),
-				// left/up
-				List.of(
-						new Expected(Point2D.create(0, 0), Tile.X),
-						new Expected(Point2D.create(-1, -1), Tile.M),
-						new Expected(Point2D.create(-2, -2), Tile.A),
-						new Expected(Point2D.create(-3, -3), Tile.S)
-				)
+			// right
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(1, 0), Tile.M),
+				new Expected(Point2D.create(2, 0), Tile.A),
+				new Expected(Point2D.create(3, 0), Tile.S)
+			),
+			// left (backwards)
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(-1, 0), Tile.M),
+				new Expected(Point2D.create(-2, 0), Tile.A),
+				new Expected(Point2D.create(-3, 0), Tile.S)
+			),
+			// down
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(0, 1), Tile.M),
+				new Expected(Point2D.create(0, 2), Tile.A),
+				new Expected(Point2D.create(0, 3), Tile.S)
+			),
+			// up (backwards)
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(0, -1), Tile.M),
+				new Expected(Point2D.create(0, -2), Tile.A),
+				new Expected(Point2D.create(0, -3), Tile.S)
+			),
+			// right/down
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(1, 1), Tile.M),
+				new Expected(Point2D.create(2, 2), Tile.A),
+				new Expected(Point2D.create(3, 3), Tile.S)
+			),
+			// right/up
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(1, -1), Tile.M),
+				new Expected(Point2D.create(2, -2), Tile.A),
+				new Expected(Point2D.create(3, -3), Tile.S)
+			),
+			// left/down
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(-1, 1), Tile.M),
+				new Expected(Point2D.create(-2, 2), Tile.A),
+				new Expected(Point2D.create(-3, 3), Tile.S)
+			),
+			// left/up
+			List.of(
+				new Expected(Point2D.create(0, 0), Tile.X),
+				new Expected(Point2D.create(-1, -1), Tile.M),
+				new Expected(Point2D.create(-2, -2), Tile.A),
+				new Expected(Point2D.create(-3, -3), Tile.S)
+			)
 		);
 
 		return grid.fields()
@@ -206,46 +206,46 @@ public class Day04 {
 
 		// of A
 		final var expectationVectors = List.of(
-				List.of(
-						// M.S
-						// .A.
-						// M.S
-						new Expected(Point2D.create(-1, -1), Tile.M),
-						new Expected(Point2D.create(1, -1), Tile.S),
-						new Expected(Point2D.create(0, 0), Tile.A),
-						new Expected(Point2D.create(-1, 1), Tile.M),
-						new Expected(Point2D.create(1, 1), Tile.S)
-				),
-				List.of(
-						// M.M
-						// .A.
-						// S.S
-						new Expected(Point2D.create(-1, -1), Tile.M),
-						new Expected(Point2D.create(1, -1), Tile.M),
-						new Expected(Point2D.create(0, 0), Tile.A),
-						new Expected(Point2D.create(-1, 1), Tile.S),
-						new Expected(Point2D.create(1, 1), Tile.S)
-				),
-				List.of(
-						// S.S
-						// .A.
-						// M.M
-						new Expected(Point2D.create(-1, -1), Tile.S),
-						new Expected(Point2D.create(1, -1), Tile.S),
-						new Expected(Point2D.create(0, 0), Tile.A),
-						new Expected(Point2D.create(-1, 1), Tile.M),
-						new Expected(Point2D.create(1, 1), Tile.M)
-				),
-				List.of(
-						// S.M
-						// .A.
-						// S.M
-						new Expected(Point2D.create(-1, -1), Tile.S),
-						new Expected(Point2D.create(1, -1), Tile.M),
-						new Expected(Point2D.create(0, 0), Tile.A),
-						new Expected(Point2D.create(-1, 1), Tile.S),
-						new Expected(Point2D.create(1, 1), Tile.M)
-				)
+			List.of(
+				// M.S
+				// .A.
+				// M.S
+				new Expected(Point2D.create(-1, -1), Tile.M),
+				new Expected(Point2D.create(1, -1), Tile.S),
+				new Expected(Point2D.create(0, 0), Tile.A),
+				new Expected(Point2D.create(-1, 1), Tile.M),
+				new Expected(Point2D.create(1, 1), Tile.S)
+			),
+			List.of(
+				// M.M
+				// .A.
+				// S.S
+				new Expected(Point2D.create(-1, -1), Tile.M),
+				new Expected(Point2D.create(1, -1), Tile.M),
+				new Expected(Point2D.create(0, 0), Tile.A),
+				new Expected(Point2D.create(-1, 1), Tile.S),
+				new Expected(Point2D.create(1, 1), Tile.S)
+			),
+			List.of(
+				// S.S
+				// .A.
+				// M.M
+				new Expected(Point2D.create(-1, -1), Tile.S),
+				new Expected(Point2D.create(1, -1), Tile.S),
+				new Expected(Point2D.create(0, 0), Tile.A),
+				new Expected(Point2D.create(-1, 1), Tile.M),
+				new Expected(Point2D.create(1, 1), Tile.M)
+			),
+			List.of(
+				// S.M
+				// .A.
+				// S.M
+				new Expected(Point2D.create(-1, -1), Tile.S),
+				new Expected(Point2D.create(1, -1), Tile.M),
+				new Expected(Point2D.create(0, 0), Tile.A),
+				new Expected(Point2D.create(-1, 1), Tile.S),
+				new Expected(Point2D.create(1, 1), Tile.M)
+			)
 		);
 
 		return grid.fields()
@@ -257,12 +257,12 @@ public class Day04 {
 
 	static long countWords(final FixGrid<Tile> grid, List<List<Expected>> expectationVectorRules, final Point2D<Integer> pos) {
 		return expectationVectorRules
+			.stream()
+			.filter(rule -> rule
 				.stream()
-				.filter(rule -> rule
-						.stream()
-						// resolve actual tile at grid[pos+vec]
-						.allMatch(expected -> grid.getValue(pos.add(expected.vec())).orElse(null) == expected.value()))
-				.count();
+				// resolve actual tile at grid[pos+vec]
+				.allMatch(expected -> grid.getValue(pos.add(expected.vec())).orElse(null) == expected.value()))
+			.count();
 	}
 
 	static boolean matchXms(final FixGrid<Tile> grid,
@@ -271,9 +271,9 @@ public class Day04 {
 							final Point2D<Integer> p3,
 							final Point2D<Integer> p4) {
 		return grid.getValueRequired(p1) == Tile.X
-				&& grid.getValueRequired(p2) == Tile.M
-				&& grid.getValueRequired(p3) == Tile.A
-				&& grid.getValueRequired(p4) == Tile.S;
+			&& grid.getValueRequired(p2) == Tile.M
+			&& grid.getValueRequired(p3) == Tile.A
+			&& grid.getValueRequired(p4) == Tile.S;
 	}
 
 	enum Tile {

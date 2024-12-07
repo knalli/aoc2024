@@ -18,18 +18,18 @@ public class Day00 {
 
 	static long part1_SimpleFib(final long i) {
 		final var fib = new Fibonacci<>(
-				Long::sum,
-				0L,
-				1L
+			Long::sum,
+			0L,
+			1L
 		);
 		return fib.get(i);
 	}
 
 	static BigInteger part2_ComplexFib(long i) {
 		final var fib = new Fibonacci<>(
-				BigInteger::add,
-				BigInteger.ZERO,
-				BigInteger.ONE
+			BigInteger::add,
+			BigInteger.ZERO,
+			BigInteger.ONE
 		);
 		return fib.get(i);
 	}

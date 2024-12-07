@@ -34,19 +34,19 @@ public class Day01 {
 	static int sumOfDistances(final List<Integer> listL, final List<Integer> listR) {
 		assert listL.size() == listR.size();
 		return IntStream.range(0, listL.size())
-				// use abs for always-positive differences
-				.map(i -> Math.abs(listL.get(i) - listR.get(i)))
-				.sum();
+						// use abs for always-positive differences
+						.map(i -> Math.abs(listL.get(i) - listR.get(i)))
+						.sum();
 	}
 
 	static long getSimilarityScore(final List<Integer> listL, final List<Integer> listR) {
 		// avoid counting in loop with a pre-computed map of {"number" -> "counted occurrences"}
 		final var map = listR.stream()
-				.collect(groupingBy(identity(), counting()));
+							 .collect(groupingBy(identity(), counting()));
 		return listL.stream()
-				// ensure a default for non-existing numbers
-				.mapToLong(n -> n * map.getOrDefault(n, 0L))
-				.sum();
+					// ensure a default for non-existing numbers
+					.mapToLong(n -> n * map.getOrDefault(n, 0L))
+					.sum();
 	}
 
 }

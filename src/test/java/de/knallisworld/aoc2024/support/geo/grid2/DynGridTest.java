@@ -25,17 +25,17 @@ class DynGridTest {
 		final var grid = DynGrid.<Integer, Data>empty();
 
 		final var chars = Arrays
-				.stream(
-						"""
-								############
-								#...X..X...#
-								#...X..P...#
-								#...X..X...#
-								############
-								""".stripIndent().split("\n")
-				)
-				.map(s -> s.toCharArray())
-				.toList();
+			.stream(
+				"""
+					############
+					#...X..X...#
+					#...X..P...#
+					#...X..X...#
+					############
+					""".stripIndent().split("\n")
+			)
+			.map(s -> s.toCharArray())
+			.toList();
 		IntStream.range(0, chars.size())
 				 .forEach(y -> {
 					 final var line = chars.get(y);
@@ -50,7 +50,7 @@ class DynGridTest {
 								  };
 								  if (type != null) {
 									  final var value = new Data(
-											  type
+										  type
 									  );
 									  grid.setValue(Point2D.createInt(x, y), value);
 								  }
@@ -75,14 +75,14 @@ class DynGridTest {
 		grid.setValue(p0.right(), true);
 		grid.setValue(p0.right().right(), true);
 		assertThat(grid.count())
-				.isEqualTo(4);
+			.isEqualTo(4);
 		assertThat(grid.getAdjacents4(Point2D.create(4, 5)).toList())
-				.isNotNull()
-				.asList()
-				.hasSize(2)
-				.containsExactly(
-						Point2D.create(4, 4),
-						Point2D.create(5, 5)
-				);
+			.isNotNull()
+			.asList()
+			.hasSize(2)
+			.containsExactly(
+				Point2D.create(4, 4),
+				Point2D.create(5, 5)
+			);
 	}
 }

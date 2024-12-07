@@ -11,7 +11,7 @@ class UtilsTest {
 		final var p1 = Point2D.create(1, 2);
 		final var p2 = Point2D.create(4, 4);
 		assertThat(Utils.manhattenDistance(p1, p2))
-				.isNotNull()
-				.isEqualTo(5);
+			.isNotNull()
+			.isEqualTo(5);
 	}
 }

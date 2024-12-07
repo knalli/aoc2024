@@ -37,10 +37,10 @@ public class DynGrid<P extends Number, T> {
 		this.validX = new HashSet<>();
 		this.validY = new HashSet<>();
 		data.keySet()
-				.forEach(p0 -> {
-					validX.add(p0.getX());
-					validY.add(p0.getX());
-				});
+			.forEach(p0 -> {
+				validX.add(p0.getX());
+				validY.add(p0.getX());
+			});
 	}
 
 	public boolean has(final Point2D<P> p) {
@@ -75,10 +75,10 @@ public class DynGrid<P extends Number, T> {
 		validX.clear();
 		validY.clear();
 		data.keySet()
-				.forEach(p0 -> {
-					validX.add(p0.getX());
-					validY.add(p0.getX());
-				});
+			.forEach(p0 -> {
+				validX.add(p0.getX());
+				validY.add(p0.getX());
+			});
 	}
 
 	public T getValueRequired(final Point2D<P> p) {
@@ -126,9 +126,9 @@ public class DynGrid<P extends Number, T> {
 
 	public long count(final BiPredicate<Point2D<P>, T> filter) {
 		return data.entrySet()
-				.stream()
-				.filter(e -> filter.test(e.getKey(), e.getValue()))
-				.count();
+				   .stream()
+				   .filter(e -> filter.test(e.getKey(), e.getValue()))
+				   .count();
 	}
 
 	@SuppressWarnings("MethodDoesntCallSuperMethod")
@@ -153,56 +153,56 @@ public class DynGrid<P extends Number, T> {
 		final var bottomRight = maxX.max(maxY);
 
 		topLeft.untilY(bottomRight)
-				.flatMap(p -> {
-					final Stream<Optional<Point2D<P>>> concat = Stream.concat(
-							p.untilX(maxX).map(Optional::of),
-							Stream.of(Optional.empty())
-					);
-					return concat;
-				})
-				.forEach(opt -> {
-					opt.ifPresentOrElse(
-							p -> {
-								getValue(p).ifPresentOrElse(
-										v -> {
-											sb.append(renderer.apply(p, v));
-										},
-										() -> sb.append(emptyRenderer.get())
-								);
-							},
-							() -> sb.append("\n")
-					);
-				});
+			   .flatMap(p -> {
+				   final Stream<Optional<Point2D<P>>> concat = Stream.concat(
+					   p.untilX(maxX).map(Optional::of),
+					   Stream.of(Optional.empty())
+				   );
+				   return concat;
+			   })
+			   .forEach(opt -> {
+				   opt.ifPresentOrElse(
+					   p -> {
+						   getValue(p).ifPresentOrElse(
+							   v -> {
+								   sb.append(renderer.apply(p, v));
+							   },
+							   () -> sb.append(emptyRenderer.get())
+						   );
+					   },
+					   () -> sb.append("\n")
+				   );
+			   });
 
 		return sb.toString();
 	}
 
 	private Point2D<P> getMinY() {
 		return data.keySet()
-				.stream()
-				.min(comparing(p -> p.getY().longValue()))
-				.orElseThrow();
+				   .stream()
+				   .min(comparing(p -> p.getY().longValue()))
+				   .orElseThrow();
 	}
 
 	private Point2D<P> getMaxY() {
 		return data.keySet()
-				.stream()
-				.max(comparing(p -> p.getY().longValue()))
-				.orElseThrow();
+				   .stream()
+				   .max(comparing(p -> p.getY().longValue()))
+				   .orElseThrow();
 	}
 
 	private Point2D<P> getMaxX() {
 		return data.keySet()
-				.stream()
-				.max(comparing(p -> p.getX().longValue()))
-				.orElseThrow();
+				   .stream()
+				   .max(comparing(p -> p.getX().longValue()))
+				   .orElseThrow();
 	}
 
 	private Point2D<P> getMinX() {
 		return data.keySet()
-				.stream()
-				.min(comparing(p -> p.getX().longValue()))
-				.orElseThrow();
+				   .stream()
+				   .min(comparing(p -> p.getX().longValue()))
+				   .orElseThrow();
 	}
 
 	public FieldsView<P, T> fields() {
@@ -236,15 +236,15 @@ public class DynGrid<P extends Number, T> {
 		public Stream<Field<P, Optional<T>>> withinRowRangeInclusive(final Point2D<P> begin,
 																	 final Point2D<P> end) {
 			return Stream
-					.iterate(
-							begin,
-							p -> {
-								// next possible?
-								return p.getX().longValue() <= end.getX().longValue();
-							},
-							Point2D::right
-					)
-					.map(p -> Field.create(p, grid.getValue(p)));
+				.iterate(
+					begin,
+					p -> {
+						// next possible?
+						return p.getX().longValue() <= end.getX().longValue();
+					},
+					Point2D::right
+				)
+				.map(p -> Field.create(p, grid.getValue(p)));
 		}
 
 		public Stream<Field<P, T>> groupInRow(final Point2D<P> p) {
@@ -259,30 +259,30 @@ public class DynGrid<P extends Number, T> {
 				end = end.right();
 			}
 			return grid
-					.fields()
-					.withinRowRangeInclusive(start, end)
-					.flatMap(a -> a.value().stream()
-							.map(v -> Field.create(a.position(), v)));
+				.fields()
+				.withinRowRangeInclusive(start, end)
+				.flatMap(a -> a.value().stream()
+							   .map(v -> Field.create(a.position(), v)));
 		}
 
 		public record Row<P extends Number, T>(
-				P row,
-				List<Field<P, Optional<T>>> fields
+			P row,
+			List<Field<P, Optional<T>>> fields
 		) {
 
 			public List<Field<P, T>> filledFields() {
 				return fields.stream()
-						.flatMap(f -> f.value()
-								.stream()
-								.map(v -> Field.create(f.position(), v)))
-						.toList();
+							 .flatMap(f -> f.value()
+											.stream()
+											.map(v -> Field.create(f.position(), v)))
+							 .toList();
 			}
 
 		}
 
 		public record Field<P extends Number, T>(
-				Point2D<P> position,
-				T value
+			Point2D<P> position,
+			T value
 		) {
 
 			public static <P extends Number, T> Field<P, T> create(Point2D<P> position, T value) {
@@ -293,16 +293,16 @@ public class DynGrid<P extends Number, T> {
 
 		public Stream<FieldsView.Field<P, T>> stream() {
 			return Map.copyOf(grid.data)
-					.entrySet()
-					.stream()
-					.map(e -> new Field<>(e.getKey(), e.getValue()));
+					  .entrySet()
+					  .stream()
+					  .map(e -> new Field<>(e.getKey(), e.getValue()));
 		}
 
 		public Stream<FieldsView.Field<P, T>> streamDirect() {
 			return grid.data
-					.entrySet()
-					.stream()
-					.map(e -> new Field<>(e.getKey(), e.getValue()));
+				.entrySet()
+				.stream()
+				.map(e -> new Field<>(e.getKey(), e.getValue()));
 		}
 
 		public Stream<Row<P, T>> rows() {
@@ -313,30 +313,30 @@ public class DynGrid<P extends Number, T> {
 			final var topLeft = minX.min(minY);
 			final var bottomRight = maxX.max(maxY);
 			return Stream.iterate(
-							topLeft,
-							p -> {
-								// next possible?
-								return p.getY().longValue() <= maxY.getY().longValue();
-							},
-							Point2D::down
-					)
-					.map(currentY -> {
-						final var list = Stream
-								.iterate(
-										currentY,
-										p -> {
-											// next possible?
-											return p.getX().longValue() <= bottomRight.getX().longValue();
-										},
-										Point2D::right
-								)
-								.map(p -> Field.create(p, grid.getValue(p)))
-								.toList();
-						return new Row<>(
-								currentY.getY(),
-								list
-						);
-					});
+							 topLeft,
+							 p -> {
+								 // next possible?
+								 return p.getY().longValue() <= maxY.getY().longValue();
+							 },
+							 Point2D::down
+						 )
+						 .map(currentY -> {
+							 final var list = Stream
+								 .iterate(
+									 currentY,
+									 p -> {
+										 // next possible?
+										 return p.getX().longValue() <= bottomRight.getX().longValue();
+									 },
+									 Point2D::right
+								 )
+								 .map(p -> Field.create(p, grid.getValue(p)))
+								 .toList();
+							 return new Row<>(
+								 currentY.getY(),
+								 list
+							 );
+						 });
 		}
 
 		public Stream<Point2D<P>> getCluster4(final Point2D<P> p,
@@ -349,10 +349,10 @@ public class DynGrid<P extends Number, T> {
 				final var n = q.pop();
 				cluster.add(n);
 				grid.getAdjacents4(n)
-						.filter(not(cluster::contains))
-						.filter(not(q::contains))
-						.filter(a -> filter.test(new Field<>(a, grid.getValueRequired(a))))
-						.forEach(q::add);
+					.filter(not(cluster::contains))
+					.filter(not(q::contains))
+					.filter(a -> filter.test(new Field<>(a, grid.getValueRequired(a))))
+					.forEach(q::add);
 			}
 			return cluster.stream();
 		}
@@ -367,9 +367,9 @@ public class DynGrid<P extends Number, T> {
 				final var n = q.pop();
 				cluster.add(n);
 				grid.getAdjacents4(n, true)
-						.filter(not(cluster::contains))
-						.filter(a -> filter.test(new Field<>(a, grid.getValue(a))))
-						.forEach(q::add);
+					.filter(not(cluster::contains))
+					.filter(a -> filter.test(new Field<>(a, grid.getValue(a))))
+					.forEach(q::add);
 			}
 			return cluster.stream();
 		}

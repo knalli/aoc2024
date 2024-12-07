@@ -43,39 +43,39 @@ public class Point2D<T extends Number> {
 															 final T y,
 															 final Supplier<Point2D<T>> creator) {
 		return (Point2D<T>) CACHE.computeIfAbsent(x, _ -> new WeakHashMap<>())
-				.computeIfAbsent(y, _ -> creator.get());
+								 .computeIfAbsent(y, _ -> creator.get());
 	}
 
 	public static <T extends Number> Point2D<T> create(
-			final T x,
-			final T y
+		final T x,
+		final T y
 	) {
 		return lookupCache(x, y, () -> create0(x, y, null));
 	}
 
 	static <T extends Number> Point2D<T> create(
-			final T x,
-			final T y,
-			@Nullable final BiFunction<T, Integer, T> adder
+		final T x,
+		final T y,
+		@Nullable final BiFunction<T, Integer, T> adder
 	) {
 		return lookupCache(x, y, () -> create0(x, y, adder));
 	}
 
 	static <T extends Number> Point2D<T> create0(
-			final T x,
-			final T y,
-			@Nullable final BiFunction<T, Integer, T> adder
+		final T x,
+		final T y,
+		@Nullable final BiFunction<T, Integer, T> adder
 	) {
 		return new Point2D<>(
-				x,
-				y,
-				adder
+			x,
+			y,
+			adder
 		);
 	}
 
 	public static Point2D<Integer> createInt(
-			final int x,
-			final int y
+		final int x,
+		final int y
 	) {
 		return create(x, y, Integer::sum);
 	}
@@ -142,31 +142,31 @@ public class Point2D<T extends Number> {
 
 	public Stream<Point2D<T>> getAdjacents4() {
 		return Stream.of(
-				up(),
-				right(),
-				down(),
-				left()
+			up(),
+			right(),
+			down(),
+			left()
 		);
 	}
 
 	public Stream<Point2D<T>> getAdjacents8() {
 		return Stream.of(
-				up(),
-				upRight(),
-				right(),
-				downRight(),
-				down(),
-				downLeft(),
-				left(),
-				upLeft()
+			up(),
+			upRight(),
+			right(),
+			downRight(),
+			down(),
+			downLeft(),
+			left(),
+			upLeft()
 		);
 	}
 
 	Point2D<T> createNew(final T x, final T y) {
 		return Point2D.create(
-				x,
-				y,
-				adder
+			x,
+			y,
+			adder
 		);
 	}
 
@@ -176,22 +176,22 @@ public class Point2D<T extends Number> {
 
 	public Point2D<T> up(final int amount) {
 		return createNew(
-				x,
-				adder().apply(y, -amount)
+			x,
+			adder().apply(y, -amount)
 		);
 	}
 
 	public Point2D<T> upLeft() {
 		return createNew(
-				adder().apply(x, -1),
-				adder().apply(y, -1)
+			adder().apply(x, -1),
+			adder().apply(y, -1)
 		);
 	}
 
 	public Point2D<T> upRight() {
 		return createNew(
-				adder().apply(x, 1),
-				adder().apply(y, -1)
+			adder().apply(x, 1),
+			adder().apply(y, -1)
 		);
 	}
 
@@ -201,8 +201,8 @@ public class Point2D<T extends Number> {
 
 	public Point2D<T> right(final int amount) {
 		return createNew(
-				adder().apply(x, amount),
-				y
+			adder().apply(x, amount),
+			y
 		);
 	}
 
@@ -212,22 +212,22 @@ public class Point2D<T extends Number> {
 
 	public Point2D<T> down(final int amount) {
 		return createNew(
-				x,
-				adder().apply(y, amount)
+			x,
+			adder().apply(y, amount)
 		);
 	}
 
 	public Point2D<T> downLeft() {
 		return createNew(
-				adder().apply(x, -1),
-				adder().apply(y, 1)
+			adder().apply(x, -1),
+			adder().apply(y, 1)
 		);
 	}
 
 	public Point2D<T> downRight() {
 		return createNew(
-				adder().apply(x, 1),
-				adder().apply(y, 1)
+			adder().apply(x, 1),
+			adder().apply(y, 1)
 		);
 	}
 
@@ -237,15 +237,15 @@ public class Point2D<T extends Number> {
 
 	public Point2D<T> left(final int amount) {
 		return createNew(
-				adder().apply(x, -amount),
-				y
+			adder().apply(x, -amount),
+			y
 		);
 	}
 
 	public Point2D<T> times(final int amount) {
 		return createNew(
-				adder().apply(x, (amount - 1) * x.intValue()),
-				adder().apply(y, (amount - 1) * y.intValue())
+			adder().apply(x, (amount - 1) * x.intValue()),
+			adder().apply(y, (amount - 1) * y.intValue())
 		);
 	}
 
@@ -256,8 +256,8 @@ public class Point2D<T extends Number> {
 
 	public Point2D<T> add(final Point2D<T> other) {
 		return createNew(
-				adder().apply(x, other.getX().intValue()),
-				adder().apply(y, other.getY().intValue())
+			adder().apply(x, other.getX().intValue()),
+			adder().apply(y, other.getY().intValue())
 		);
 	}
 

@@ -25,19 +25,19 @@ public class Day05 {
 
 	static Input readInput(final List<String> lines) {
 		final var rules = lines
-				.stream()
-				.takeWhile(not(String::isEmpty))
-				.map(s -> {
-					final var split = s.split("\\|");
-					return new Pair<>(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
-				})
-				.toList();
+			.stream()
+			.takeWhile(not(String::isEmpty))
+			.map(s -> {
+				final var split = s.split("\\|");
+				return new Pair<>(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+			})
+			.toList();
 		final var updates = lines.stream()
 								 .skip(rules.size() + 1)
 								 .map(s -> (List<Integer>) Arrays
-										 .stream(s.split(","))
-										 .map(Integer::parseInt)
-										 .collect(toCollection(ArrayList::new))
+									 .stream(s.split(","))
+									 .map(Integer::parseInt)
+									 .collect(toCollection(ArrayList::new))
 								 )
 								 .toList();
 		return new Input(rules, updates);
@@ -100,8 +100,8 @@ public class Day05 {
 	}
 
 	record Input(
-			List<Pair<Integer, Integer>> orderingRules,
-			List<List<Integer>> updates
+		List<Pair<Integer, Integer>> orderingRules,
+		List<List<Integer>> updates
 	) {
 	}
 
