@@ -249,6 +249,13 @@ public class Point2D<T extends Number> {
 		);
 	}
 
+	public Point2D<T> negative() {
+		return createNew(
+			adder().apply(x, -2 * x.intValue()),
+			adder().apply(y, -2 * y.intValue())
+		);
+	}
+
 	@Override
 	public String toString() {
 		return "(%s/%s)".formatted(x, y);
