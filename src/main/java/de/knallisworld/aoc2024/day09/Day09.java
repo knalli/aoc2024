@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -15,7 +14,6 @@ import static de.knallisworld.aoc2024.support.puzzle.InputReader.readInputFirstL
 import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Gatherer.ofSequential;
 
 @Log4j2
 public class Day09 {
@@ -115,31 +113,28 @@ public class Day09 {
 		private final List<Block> data;
 
 		public long checksum() {
-			return data
-				.stream()
-				.<Long>gather(ofSequential(
-					AtomicLong::new,
-					(counter, block, downstream) -> {
-						if (!block.free()) {
-							for (var i = 0; i < block.length(); i++) {
-								downstream.push((counter.get() + i) * block.fileId());
-							}
-						}
-						counter.set(counter.get() + block.length());
-						return true;
+			long sum = 0;
+			long position = 0;
+
+			for (final var block : data) {
+				if (!block.free()) {
+					for (var i = 0; i < block.length(); i++) {
+						sum += (position + i) * block.fileId();
 					}
-				))
-				.mapToLong(Long::longValue)
-				.sum();
+				}
+				position += block.length();
+			}
+
+			return sum;
 		}
 
 		public boolean hasGaps() {
-			return IntStream
-				.range(0, data.size())
-				.anyMatch(i -> {
-					final var block = data.get(i);
-					return block.free() && block.length() > 0;
-				});
+			for (final var block : data) {
+				if (block.free() && block.length() > 0) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public Stream<Ordered> stream() {
@@ -168,10 +163,6 @@ public class Day09 {
 
 		public int size() {
 			return data.size();
-		}
-
-		public List<Block> blocks() {
-			return data;
 		}
 
 		public void set(int idx, Block block) {
