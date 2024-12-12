@@ -189,6 +189,10 @@ public class FixGrid<T> {
 		return data[0].length;
 	}
 
+	public int size() {
+		return getHeight() * getWidth();
+	}
+
 	public static class FieldsView<T> {
 
 		public record Field<T>(Point2D<Integer> pos, T value) {
