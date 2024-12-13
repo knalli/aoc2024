@@ -23,6 +23,7 @@
 
         <!-- dependencies -->
         <commons-geometry.version>1.0</commons-geometry.version>
+        <commons-math3.version>3.4.1</commons-math3.version>
         <jgrapht-core.version>1.5.2</jgrapht-core.version>
         <log4j.version>2.24.2</log4j.version>
     </properties>
@@ -59,6 +60,11 @@
                 <artifactId>commons-geometry-io-euclidean</artifactId>
                 <version>${commons-geometry.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>${commons-math3.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -92,7 +98,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-geometry-io-euclidean</artifactId>
+            <artifactId>commons-math3</artifactId>
         </dependency>
         <dependency>
             <groupId>tools.aqua</groupId>
