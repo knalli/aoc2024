@@ -148,12 +148,15 @@ public class Day15 {
 		}
 
 		final var oldBoxIdPositions = boxIds.isEmpty()
+			// part 1
 			? Map.of()
+			// part 2
 			: pushable.stream().collect(toMap(identity(), boxIds::remove));
 		pushable.forEach(position -> grid.setValue(position, Tile.EMPTY));
 		pushable.forEach(position -> {
 			final var next = position.add(move.offset());
 			grid.setValue(next, Tile.BOX);
+			// part2
 			if (!oldBoxIdPositions.isEmpty()) {
 				boxIds.put(next, oldBoxIdPositions.get(position));
 			}
@@ -288,6 +291,7 @@ public class Day15 {
 		return grid;
 	}
 
+	// part 2
 	static GridWrapper expandGrid(final FixGrid<Tile> grid) {
 		final var result = FixGrid.create(Tile.class, grid.getHeight(), grid.getWidth() * 2);
 		final var boxIds = new HashMap<Point2D<Integer>, Object>();
