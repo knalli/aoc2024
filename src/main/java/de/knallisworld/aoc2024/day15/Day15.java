@@ -73,7 +73,10 @@ public class Day15 {
 			} else if (nextValue == Tile.BOX) {
 				// try to push
 				final List<Point2D<Integer>> nexts;
-				if (boxIds.containsKey(next)) {
+				if (!boxIds.containsKey(next)) {
+					// part1
+					nexts = List.of(next);
+				} else {
 					// part2
 					final var boxId = boxIds.get(next);
 					nexts = boxIds.entrySet()
@@ -81,9 +84,6 @@ public class Day15 {
 								  .filter(e -> e.getValue() == boxId)
 								  .map(Map.Entry::getKey)
 								  .toList();
-				} else {
-					// part1
-					nexts = List.of(next);
 				}
 				if (!pushBoxes(grid, nexts, move, boxIds)) {
 					// not possible
